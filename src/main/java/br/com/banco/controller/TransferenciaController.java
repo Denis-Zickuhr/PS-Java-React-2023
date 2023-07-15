@@ -1,15 +1,13 @@
 package br.com.banco.controller;
 
-import br.com.banco.model.Conta;
 import br.com.banco.model.Transferencia;
-import br.com.banco.repository.ContaRepository;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 import br.com.banco.repository.TransferenciaRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
+
 
 @RestController
 @RequestMapping("/transferencias")
@@ -48,5 +46,4 @@ public class TransferenciaController {
             return transferenciaRepository.findByDataTransferenciaBetween(startDateTime, endDateTime);
         }
     }
-
 }
