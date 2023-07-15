@@ -88,7 +88,7 @@ public class BancoApplicationTests {
         Transferencia transferencia3 = new Transferencia(initDate.plusDays(11), new BigDecimal(100), TIPO_TRANSACAO.DEPOSITO.name(), "Operator 1", conta);
         transferenciaRepository.save(transferencia3);
 
-        int actualOutput = transferenciaRepository.findByDataTransferenciaBetween(initDate, endDate).size();
+        int actualOutput = transferenciaRepository.findByDataTransferenciaAndNomeResponsavel(initDate, endDate, null).size();
 
         transferenciaRepository.delete(transferencia1);
         transferenciaRepository.delete(transferencia2);

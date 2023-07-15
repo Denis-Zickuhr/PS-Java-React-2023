@@ -1,11 +1,13 @@
 package br.com.banco.controller;
 
 import br.com.banco.model.Transferencia;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import br.com.banco.repository.TransferenciaRepository;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -43,20 +45,16 @@ public class TransferenciaController {
     }
 
     @GetMapping("/between-dates")
-    public List<Transferencia> getTransferenciasBetweenDates(
-            @RequestParam(required = false)
-            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDateTime,
-            @RequestParam(required = false)
-            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDateTime) {
+    public List<Transferencia> getTransferenciasBetweenDatesAndNomeResponsavel(
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDateTime,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDateTime,
+            @RequestParam(required = false) String nomeResponsavel) {
 
-        if (startDateTime == null && endDateTime == null) {
-            return transferenciaRepository.findAll();
-        } else if (startDateTime == null) {
-            return transferenciaRepository.findByDataTransferenciaBefore(endDateTime);
-        } else if (endDateTime == null) {
-            return transferenciaRepository.findByDataTransferenciaAfter(startDateTime);
-        } else {
-            return transferenciaRepository.findByDataTransferenciaBetween(startDateTime, endDateTime);
-        }
+        return transferenciaRepository.findByDataTransferenciaAndNomeResponsavel(startDateTime, endDateTime, nomeResponsavel);
+    }
+
+    @GetMapping("/count")
+    public BigDecimal countTransferencias() {
+        return transferenciaRepository.getTotalTransferenciaValor();
     }
 }
