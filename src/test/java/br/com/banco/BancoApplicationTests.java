@@ -15,10 +15,8 @@ import org.springframework.test.context.ContextConfiguration;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.time.temporal.TemporalUnit;
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.TimeUnit;
 
 @EnableAutoConfiguration
 @ContextConfiguration(classes = {TransferenciaRepository.class, ContaRepository.class})
