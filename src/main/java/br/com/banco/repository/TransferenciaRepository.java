@@ -12,12 +12,12 @@ import java.util.List;
 @Repository
 public interface TransferenciaRepository extends JpaRepository<Transferencia, Long> {
 
-    @Query("SELECT t FROM Transferencia t WHERE t.dataTransferencia < :endDateTime")
+    @Query("SELECT t FROM Transferencia t WHERE t.dataTransferencia <= :endDateTime")
     List<Transferencia> findByDataTransferenciaBefore(@Param("endDateTime") LocalDateTime endDateTime);
 
-    @Query("SELECT t FROM Transferencia t WHERE t.dataTransferencia > :startDateTime")
+    @Query("SELECT t FROM Transferencia t WHERE t.dataTransferencia >= :startDateTime")
     List<Transferencia> findByDataTransferenciaAfter(@Param("startDateTime") LocalDateTime startDateTime);
 
-    @Query("SELECT t FROM Transferencia t WHERE t.dataTransferencia BETWEEN :startDateTime AND :endDateTime")
+    @Query("SELECT t FROM Transferencia t WHERE t.dataTransferencia >= :startDateTime AND t.dataTransferencia <= :endDateTime")
     List<Transferencia> findByDataTransferenciaBetween(@Param("startDateTime") LocalDateTime startDateTime, @Param("endDateTime") LocalDateTime endDateTime);
 }

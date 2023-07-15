@@ -80,5 +80,9 @@ public class Transferencia {
     public void setConta(Conta conta) {
         this.conta = conta;
     }
+
+    public Long getId() {
+        return id;
+    }
 }
 
