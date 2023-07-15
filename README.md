@@ -22,6 +22,12 @@
 
 - 3. POST /contas: Cria uma nova conta. Requer um corpo JSON contendo o nome do responsável pela conta.
 
+```
+{
+  "nomeResponsavel": "Denis Zickhur"
+}
+```
+
 
 ###  Transferências
 - 1. GET /transferencias: Retorna todas as transferências cadastradas.
@@ -29,3 +35,15 @@
 - 2. GET /transferencias/between-dates?startDateTime={startDateTime}&endDateTime={endDateTime}: Retorna as transferências realizadas entre as datas especificadas. Os parâmetros startDateTime e endDateTime devem estar no formato ISO 8601 (por exemplo, 2023-07-14T14:30:00).
 
 - 3. POST /transferencias: Cria uma nova transferência. Requer um corpo JSON contendo os detalhes da transferência, como data, valor, tipo, nome do operador de transação e ID da conta de origem.
+
+```
+{
+  "dataTransferencia": "2023-07-14T14:30:00",
+  "valor": 100.00,
+  "tipo": "DEBIT",
+  "nomeOperadorTransacao": "Denis Zickhur",
+  "conta": {
+    "id": 1
+  }
+}
+```
