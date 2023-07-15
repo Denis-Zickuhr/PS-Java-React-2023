@@ -20,4 +20,7 @@ public interface TransferenciaRepository extends JpaRepository<Transferencia, Lo
 
     @Query("SELECT t FROM Transferencia t WHERE t.dataTransferencia >= :startDateTime AND t.dataTransferencia <= :endDateTime")
     List<Transferencia> findByDataTransferenciaBetween(@Param("startDateTime") LocalDateTime startDateTime, @Param("endDateTime") LocalDateTime endDateTime);
+
+    List<Transferencia> findByContaId(Long contaId);
+
 }

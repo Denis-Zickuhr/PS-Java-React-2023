@@ -180,4 +180,24 @@ public class BancoApplicationTests {
 
         contaRepository.delete(conta);
     }
+
+    @Test
+    public void testGetTransferenciaByContaId() {
+
+        Conta conta = new Conta("Caio Castro");
+        contaRepository.save(conta);
+
+        Transferencia transferencia1 = new Transferencia(LocalDateTime.now(), new BigDecimal(100), TIPO_TRANSACAO.DEPOSITO.name(), "Operator 1", conta);
+        transferenciaRepository.save(transferencia1);
+        Transferencia transferencia2 = new Transferencia(LocalDateTime.now(), new BigDecimal(200), TIPO_TRANSACAO.SAQUE.name(), "Operator 2", conta);
+        transferenciaRepository.save(transferencia2);
+
+        int actualValue = transferenciaRepository.findByContaId(conta.getId()).size();
+
+        transferenciaRepository.delete(transferencia1);
+        transferenciaRepository.delete(transferencia2);
+        contaRepository.delete(conta);
+
+        Assertions.assertEquals(2, actualValue);
+    }
 }
